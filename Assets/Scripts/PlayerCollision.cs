@@ -10,11 +10,13 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] GameObject key;
     [SerializeField] GameObject portal;
     [SerializeField] GameObject start;
+    [SerializeField] Vector3 startPos;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        startPos = player.transform.position;
         player = GameObject.Find("Key");
         player = GameObject.Find("Portal");
         player = GameObject.Find("StartMarker");
@@ -25,8 +27,8 @@ public class PlayerCollision : MonoBehaviour
          if (other.tag == "Exit") 
          {
              Debug.Log("Hit Portal!");
-             Invoke("ExitLevel", 1.5f);
-             Invoke("Vanish",0.5f);
+             Invoke("ExitLevel", 0.5f);
+             Vanish();
          }
          else if(other.tag == "Key")
          {
@@ -37,7 +39,7 @@ public class PlayerCollision : MonoBehaviour
          else if(other.tag == "Killbox")
          {
              Debug.Log("Hit killbox");
-             player.transform.position = start.transform.position; 
+             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
          }
          else
          {

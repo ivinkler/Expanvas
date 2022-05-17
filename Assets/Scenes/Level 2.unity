@@ -161,6 +161,35 @@ Transform:
   m_Father: {fileID: 325397125}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!21 &156886710
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'painting_2Material
+
+    45316'
+  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 748a147d678793340bf2e9b6469aecee, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors:
+    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &169029082 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3487923186238338646, guid: e95836cc433dab649829722e14b8dede, type: 3}
@@ -408,7 +437,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 642422535}
+  - {fileID: 156886710}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -820,6 +849,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 769d9c1fdd670d9439dc1f031892d488, type: 2}
+    - target: {fileID: -7029948723529949830, guid: 8fb2f1864abf0af46ac6fbce3e58c791, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -4292154010595695564, guid: 8fb2f1864abf0af46ac6fbce3e58c791, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -852,6 +885,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: painting_2_collision
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8fb2f1864abf0af46ac6fbce3e58c791, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821623529969584324, guid: 8fb2f1864abf0af46ac6fbce3e58c791, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fb2f1864abf0af46ac6fbce3e58c791, type: 3}
 --- !u!4 &561342466 stripped
@@ -859,35 +900,44 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8fb2f1864abf0af46ac6fbce3e58c791, type: 3}
   m_PrefabInstance: {fileID: 561342465}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &642422535
-Material:
-  serializedVersion: 6
+--- !u!1 &561342467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7029948723529949830, guid: 8fb2f1864abf0af46ac6fbce3e58c791, type: 3}
+  m_PrefabInstance: {fileID: 561342465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &561342468 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8fb2f1864abf0af46ac6fbce3e58c791, type: 3}
+  m_PrefabInstance: {fileID: 561342465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &561342469
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 'painting_2Material
-
-    36234'
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 748a147d678793340bf2e9b6469aecee, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats: []
-    m_Colors:
-    - _Color: {r: 0.82089555, g: 0.82089555, b: 0.82089555, a: 1}
-  m_BuildTextureStacks: []
+  m_GameObject: {fileID: 561342467}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -462981019419857548, guid: 8fb2f1864abf0af46ac6fbce3e58c791, type: 3}
+--- !u!64 &561342470
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561342468}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &674478740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,6 +1481,7 @@ MonoBehaviour:
   key: {fileID: 1200659882}
   portal: {fileID: 988900842}
   start: {fileID: 2022080949}
+  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1994431250
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,7 +1688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1991159284639426285, guid: 0503d76528b507149b9df7ad46f4e8a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.083
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2153378994209746472, guid: 0503d76528b507149b9df7ad46f4e8a7, type: 3}
       propertyPath: m_RootOrder
@@ -1645,7 +1696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2153378994209746472, guid: 0503d76528b507149b9df7ad46f4e8a7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.5375
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: 2153378994209746472, guid: 0503d76528b507149b9df7ad46f4e8a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1653,7 +1704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2153378994209746472, guid: 0503d76528b507149b9df7ad46f4e8a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0275
+      value: -0.052
       objectReference: {fileID: 0}
     - target: {fileID: 2153378994209746472, guid: 0503d76528b507149b9df7ad46f4e8a7, type: 3}
       propertyPath: m_LocalRotation.w
