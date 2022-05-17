@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -8,11 +9,15 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject key;
     [SerializeField] GameObject portal;
+    [SerializeField] GameObject start;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        player = GameObject.Find("Key");
+        player = GameObject.Find("Portal");
+        player = GameObject.Find("StartMarker");
     }
 
     void OnTriggerEnter(Collider other) 
@@ -29,6 +34,11 @@ public class PlayerCollision : MonoBehaviour
              key.SetActive(false);
              portal.SetActive(true);
          }
+         else if(other.tag == "Killbox")
+         {
+             Debug.Log("Hit killbox");
+             player.transform.position = start.transform.position; 
+         }
          else
          {
              Debug.Log("Collision Detected");
@@ -42,6 +52,6 @@ public class PlayerCollision : MonoBehaviour
 
      void ExitLevel()
      {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
      }
 }

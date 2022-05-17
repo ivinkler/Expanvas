@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Exit
   - Key
+  - Start
+  - Killbox
   layers:
   - Default
   - TransparentFX

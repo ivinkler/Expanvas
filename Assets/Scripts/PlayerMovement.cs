@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         remainingJumps = extraJumps+1;
         rigidbody.useGravity = false;
+        groundCheckRadius = 0.015f;
     }
 
     // Update is called once per frame
@@ -94,9 +95,21 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        jumpButtonPressed = ((jumpButton1.GetComponent<TouchButtonBehavior>().buttonDown) || (jumpButton2.GetComponent<TouchButtonBehavior>().buttonDown));
+        //jumpButtonPressed = ((jumpButton1.GetComponent<TouchButtonBehavior>().buttonDown) || (jumpButton2.GetComponent<TouchButtonBehavior>().buttonDown));
 
-        if((Input.GetButtonDown("Jump") || jumpButtonPressed) && (isGrounded || Time.time - lastGrounded <= recallGrounded || remainingJumps > 0 ))
+        if((Input.GetButtonDown("Jump")) && (isGrounded || Time.time - lastGrounded <= recallGrounded || remainingJumps > 0 ))
+        {
+            //Vector3 tempMove = new Vector3(rigidbody.velocity.x,jumpPower,0);
+            rigidbody.velocity = this.transform.TransformDirection(new Vector3(localVector.x,jumpPower,0));
+            //rigidbody.AddRelativeForce(tempMove);
+            remainingJumps--;
+            localVector = transform.InverseTransformDirection(rigidbody.velocity);
+        }
+    }
+
+    public void JumpUI()
+    {
+        if((isGrounded || Time.time - lastGrounded <= recallGrounded || remainingJumps > 0 ))
         {
             //Vector3 tempMove = new Vector3(rigidbody.velocity.x,jumpPower,0);
             rigidbody.velocity = this.transform.TransformDirection(new Vector3(localVector.x,jumpPower,0));
@@ -108,12 +121,13 @@ public class PlayerMovement : MonoBehaviour
 
     void JumpExtra()
     {
+        jumpButtonPressed = ((jumpButton1.GetComponent<TouchButtonBehavior>().buttonDown) || (jumpButton2.GetComponent<TouchButtonBehavior>().buttonDown));
         if (rigidbody.velocity.y < 0) 
         {
             rigidbody.velocity += this.transform.TransformDirection(gravityDirection * (fallMultiplier - 1) * Time.deltaTime);
             //rigidbody.AddRelativeForce(gravityDirection * (fallMultiplier - 1) * Time.deltaTime);
         } 
-        else if (rigidbody.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
+        else if (rigidbody.velocity.y > 0 && (!Input.GetKey(KeyCode.Space)) && (!jumpButtonPressed))
         {
             rigidbody.velocity += this.transform.TransformDirection(gravityDirection * (lowJumpMultiplier - 1) * Time.deltaTime);
             //rigidbody.AddRelativeForce(gravityDirection * (lowJumpMultiplier - 1) * Time.deltaTime);
@@ -144,33 +158,4 @@ public class PlayerMovement : MonoBehaviour
         this.transform.localPosition = new Vector3(this.transform.localPosition.x,this.transform.localPosition.y,0);
     }
 
-    void OnTriggerEnter(Collider other) 
-    {
-         if (other.tag == "Exit") 
-         {
-             Debug.Log("Hit Portal!");
-             Invoke("ExitLevel", 1.5f);
-             Invoke("Vanish",0.5f);
-         }
-         else if(other.tag == "Key")
-         {
-             Debug.Log("Hit Key!");
-             key.SetActive(false);
-             portal.SetActive(true);
-         }
-         else
-         {
-             //Do nothing
-         }
-     }
-
-    void Vanish()
-    {
-        this.gameObject.SetActive(false);
-    }
-
-     void ExitLevel()
-     {
-        
-     }
 }
