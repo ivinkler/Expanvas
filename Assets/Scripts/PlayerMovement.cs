@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -27,6 +28,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float fallMultiplier = 2.5f; 
     [SerializeField] float lowJumpMultiplier = 2f;
 
+    [SerializeField] bool useTouchControls;
+
+    [SerializeField] GameObject leftButton;
+    [SerializeField] GameObject rightButton;
+    [SerializeField] GameObject jumpButton1;
+    [SerializeField] GameObject jumpButton2;
+
+    [SerializeField] GameObject key;
+    [SerializeField] GameObject portal;
+
+    bool jumpButtonPressed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +65,26 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        float x = Input.GetAxis("Horizontal");
+        float x;
+        if(useTouchControls)
+        {
+            if(rightButton.GetComponent<TouchButtonBehavior>().buttonDown)
+            {
+                x = 1;
+            }
+            else if(leftButton.GetComponent<TouchButtonBehavior>().buttonDown)
+            {
+                x = -1;
+            }
+            else
+            {
+                x = 0;
+            }
+        }
+        else
+        {
+            x = Input.GetAxis("Horizontal");
+        }
         float xMove = x*speed;
 
         rigidbody.velocity = this.transform.TransformDirection(new Vector3(xMove,localVector.y,0));
@@ -62,7 +94,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if(Input.GetButtonDown("Jump") && (isGrounded || Time.time - lastGrounded <= recallGrounded || remainingJumps > 0 ))
+        jumpButtonPressed = ((jumpButton1.GetComponent<TouchButtonBehavior>().buttonDown) || (jumpButton2.GetComponent<TouchButtonBehavior>().buttonDown));
+
+        if((Input.GetButtonDown("Jump") || jumpButtonPressed) && (isGrounded || Time.time - lastGrounded <= recallGrounded || remainingJumps > 0 ))
         {
             //Vector3 tempMove = new Vector3(rigidbody.velocity.x,jumpPower,0);
             rigidbody.velocity = this.transform.TransformDirection(new Vector3(localVector.x,jumpPower,0));
@@ -79,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
             rigidbody.velocity += this.transform.TransformDirection(gravityDirection * (fallMultiplier - 1) * Time.deltaTime);
             //rigidbody.AddRelativeForce(gravityDirection * (fallMultiplier - 1) * Time.deltaTime);
         } 
-        else if (rigidbody.velocity.y > 0 && !Input.GetKey(KeyCode.Space)) 
+        else if (rigidbody.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
             rigidbody.velocity += this.transform.TransformDirection(gravityDirection * (lowJumpMultiplier - 1) * Time.deltaTime);
             //rigidbody.AddRelativeForce(gravityDirection * (lowJumpMultiplier - 1) * Time.deltaTime);
@@ -109,4 +143,34 @@ public class PlayerMovement : MonoBehaviour
     {
         this.transform.localPosition = new Vector3(this.transform.localPosition.x,this.transform.localPosition.y,0);
     }
+
+    void OnTriggerEnter(Collider other) 
+    {
+         if (other.tag == "Exit") 
+         {
+             Debug.Log("Hit Portal!");
+             Invoke("ExitLevel", 1.5f);
+             Invoke("Vanish",0.5f);
+         }
+         else if(other.tag == "Key")
+         {
+             Debug.Log("Hit Key!");
+             key.SetActive(false);
+             portal.SetActive(true);
+         }
+         else
+         {
+             //Do nothing
+         }
+     }
+
+    void Vanish()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+     void ExitLevel()
+     {
+        
+     }
 }
