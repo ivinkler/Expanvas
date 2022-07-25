@@ -1,5 +1,5 @@
 {
-  "dependencies": {
+    "dependencies": {
     "com.ptc.vuforia.engine": "file:com.ptc.vuforia.engine-10.8.4.tgz",
     "com.unity.2d.animation": "5.1.1",
     "com.unity.2d.psdimporter": "4.2.0",
