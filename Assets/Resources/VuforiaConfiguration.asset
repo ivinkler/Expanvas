@@ -22,8 +22,9 @@ MonoBehaviour:
     virtualSceneScaleFactor: 1
     modelTargetRecoWhileExtendedTracked: 1
     shareRecordingsInITunes: 0
+    logLevel: 0
     version: 10.7.2
-    eulaAcceptedVersions: '{"Values":["10.5","10.7"]}'
+    eulaAcceptedVersions: '{"Values":["10.5","10.7","10.8"]}'
   database:
     disableModelExtraction: 0
   shaders:
@@ -31,7 +32,7 @@ MonoBehaviour:
   videoBackground:
     numDivisions: 2
     videoBackgroundShader: {fileID: 4800000, guid: f40623b353e2f1943b1b3ba42975db7a, type: 3}
-    unlitShader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+    unlitShader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 3}
     videoBackgroundEnabled: 1
   deviceTracker:
     autoStartTracker: 0
