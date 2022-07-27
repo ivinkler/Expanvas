@@ -14,9 +14,4 @@ public class KeyBehavior : MonoBehaviour
         collider = this.gameObject.GetComponent<SphereCollider>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

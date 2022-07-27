@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //DEPRECATED: USE NewPlayerMovement script
+
+
+    /*
     [SerializeField] float speed = 5f;
     [SerializeField] float jumpPower = 5f;
     [SerializeField] int extraJumps = 1;
@@ -157,5 +161,5 @@ public class PlayerMovement : MonoBehaviour
     {
         this.transform.localPosition = new Vector3(this.transform.localPosition.x,this.transform.localPosition.y,0);
     }
-
+*/
 }
