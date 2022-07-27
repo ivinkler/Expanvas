@@ -27,8 +27,9 @@ public class PlayerCollision : MonoBehaviour
          if (other.tag == "Exit") 
          {
              Debug.Log("Hit Portal!");
-             Invoke("ExitLevel", 0.5f);
              Vanish();
+             Invoke("ExitLevel", 0.5f);
+
          }
          else if(other.tag == "Key")
          {

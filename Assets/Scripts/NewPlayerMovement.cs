@@ -32,6 +32,10 @@ public class NewPlayerMovement : MonoBehaviour
 
     [SerializeField] PlayerInput playerInput;
 
+    float scaleX;
+    float scaleY;
+    float scaleZ;
+
     //[SerializeField] bool useTouchControls;
 
     //[SerializeField] GameObject leftButton;
@@ -39,8 +43,8 @@ public class NewPlayerMovement : MonoBehaviour
     //[SerializeField] GameObject jumpButton;
     //[SerializeField] GameObject jumpButton2;
 
-    [SerializeField] GameObject key;
-    [SerializeField] GameObject portal;
+    //[SerializeField] GameObject key;
+    //[SerializeField] GameObject portal;
 
     public UnityEvent onGroundJump = null;
     public UnityEvent onAirJump = null;
@@ -49,6 +53,11 @@ public class NewPlayerMovement : MonoBehaviour
     private Animator _anim;
     [SerializeField] GameObject puppetBody;
     [SerializeField] bool flipped;
+
+    
+    [SerializeField] AudioSource soundPlayer;
+    [SerializeField] bool loop;
+    [SerializeField] float pitch;
 
 
     // Start is called before the first frame update
@@ -60,11 +69,27 @@ public class NewPlayerMovement : MonoBehaviour
         groundCheckRadius = 0.015f;
         playerInput = gameObject.GetComponent<PlayerInput>();
 
+        //Set up scaling
+        scaleX = gameObject.transform.localScale.x;
+        scaleY = gameObject.transform.localScale.y;
+        scaleZ = gameObject.transform.localScale.z;
+
+        speed *= scaleX;
+        jumpPower *= scaleX;
+
+        scaleFactor = 0.075f * scaleX;
+
         //Set up animations
         _anim = GetComponentInChildren<Animator>();
         puppetBody = GameObject.Find("Pthalo_puppet");
         flipped = false;
         playerInput = gameObject.GetComponent<PlayerInput>();
+
+        //Set up sound
+
+        soundPlayer = gameObject.GetComponent<AudioSource>();
+        soundPlayer.loop = loop;
+        pitch = soundPlayer.pitch;
     }
 
     // Update is called once per frame
@@ -73,8 +98,11 @@ public class NewPlayerMovement : MonoBehaviour
         if(GameObject.Find("Head").GetComponent<Renderer>().isVisible)
         {
             Vector3 downVector = this.transform.TransformDirection((gravityDirection * (scaleFactor*gravity) * rigidbody.mass));
-            rigidbody.AddRelativeForce(downVector);
+            UnityEngine.Debug.Log("Global Down Vector: " + downVector);
+            rigidbody.AddForce(downVector);
+            UnityEngine.Debug.Log("Fall Vector: " + rigidbody.velocity);
             localVector = transform.InverseTransformDirection(rigidbody.velocity);
+            UnityEngine.Debug.Log("Local Vector: " + localVector);
             Move();
             GroundCheck();
             Jump();
@@ -103,7 +131,7 @@ public class NewPlayerMovement : MonoBehaviour
     void Jump()
     {
         UnityEngine.Debug.Log("Jump!");
-        if(playerInput.actions["Jump"].triggered && (isGrounded || Time.time - lastGrounded <= recallGrounded || remainingJumps > 0 ))
+        if(playerInput.actions["Jump"].triggered && (isGrounded || Time.time - lastGrounded <= recallGrounded || remainingJumps > 0 ) && (remainingJumps > 0))
         {
             //Vector3 tempMove = new Vector3(rigidbody.velocity.x,jumpPower,0);
             rigidbody.velocity = this.transform.TransformDirection(new Vector3(localVector.x,jumpPower,0));
@@ -111,7 +139,8 @@ public class NewPlayerMovement : MonoBehaviour
             remainingJumps--;
             localVector = transform.InverseTransformDirection(rigidbody.velocity);
             AnimateJump();
-            onGroundJump.Invoke();
+            //onGroundJump.Invoke();
+            playJumpAudio(isGrounded);
         }
     }
 
@@ -167,14 +196,14 @@ public class NewPlayerMovement : MonoBehaviour
         {
             _anim.SetFloat("Speed",xmove*-1);
             _anim.SetBool("isMoving",true);
-            gameObject.transform.localScale = new Vector3(1, 1, 1)*2;
+            gameObject.transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
             flipped = false;
         }
         else if(xmove > 0)
         {
             _anim.SetFloat("Speed",xmove);
             _anim.SetBool("isMoving",true);
-            gameObject.transform.localScale = new Vector3(-1, 1, 1)*2;
+            gameObject.transform.localScale = new Vector3(-scaleX, scaleY, scaleZ);
             flipped = true;
         }
         else
@@ -182,6 +211,23 @@ public class NewPlayerMovement : MonoBehaviour
             _anim.SetFloat("Speed",xmove);
             _anim.SetBool("isMoving",false);
         }
+    }
+
+    void playJumpAudio(bool grounded)
+    {
+        soundPlayer.Stop();
+
+        if(grounded)
+        {
+            soundPlayer.pitch = this.pitch;
+            soundPlayer.Play();
+        }
+        else
+        {
+            soundPlayer.pitch += .05f;
+            soundPlayer.Play();
+        }
+
     }
 
 }
