@@ -64,6 +64,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1814992784182947379, guid: c79133d5b27a8a84aa6ff87404702a32, type: 3}
+      propertyPath: gravity
+      value: 9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1814992784182947379, guid: c79133d5b27a8a84aa6ff87404702a32, type: 3}
       propertyPath: relativeTransform
       value: 
       objectReference: {fileID: 0}

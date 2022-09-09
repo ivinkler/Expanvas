@@ -14,8 +14,6 @@ public class PassablePlatform : MonoBehaviour
     {
         this.trigger = this.gameObject.GetComponent<BoxCollider>();
         this.mesh = this.gameObject.GetComponent<MeshCollider>();
-        this.mat1 = 
-        this.mat2 = 
         this.GetComponent<Renderer>().material = mat1;
     }
 

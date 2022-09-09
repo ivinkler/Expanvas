@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Expanvas
-  productName: Pthalo's Paintings
+  productName: Pthalo
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -134,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.5
+  bundleVersion: 0.9
   preloadedAssets:
   - {fileID: 11400000, guid: e90b68c7e7737c7488c203a465e38d4f, type: 2}
   metroInputSource: 0
@@ -341,7 +341,7 @@ PlayerSettings:
       m_SubKind: 
     - m_Textures:
       - {fileID: 2800000, guid: e265c50d57a27b34bb73c5cd19e79460, type: 3}
-      - {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+      - {fileID: 2800000, guid: e265c50d57a27b34bb73c5cd19e79460, type: 3}
       m_Width: 432
       m_Height: 432
       m_Kind: 2
